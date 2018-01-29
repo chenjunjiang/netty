@@ -1,4 +1,4 @@
-package com.chenjj.nio.netty.bio;
+package com.chenjj.io.bio;
 
 import java.io.BufferedReader;
 import java.io.IOException;

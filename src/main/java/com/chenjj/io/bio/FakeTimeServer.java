@@ -1,4 +1,4 @@
-package com.chenjj.nio.netty.bio;
+package com.chenjj.io.bio;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,10 +6,10 @@ import java.net.Socket;
 
 /**
  * @Author: chenjj
- * @Date: 2018-01-23
- * @Description:
+ * @Date: 2018-01-24
+ * @Description: 用线程池实现伪异步, 但是它底层的通讯依然采用同步阻塞模型
  */
-public class Timeserver {
+public class FakeTimeServer {
 
   public static void main(String[] args) throws IOException {
     int port = 8080;
@@ -20,19 +20,16 @@ public class Timeserver {
         // 异常之后采用默认值
       }
     }
-
     ServerSocket serverSocket = null;
     try {
       serverSocket = new ServerSocket(port);
       System.out.println("The time server is start in port: " + port);
       Socket socket = null;
+      TimeServerHandlerExecutePool timeServerHandlerExecutePool = new TimeServerHandlerExecutePool(
+          50, 1000);// 创建线程池
       while (true) {
         socket = serverSocket.accept();
-        /**
-         * BIO的主要问题在于每当一个新的客户端请求接入时，服务端必须创建一个新的线程处理新接入的客户端链路，
-         * 一个线程只能处理一个客户端连接。这种模型显然不满足高想能、高并发接入的场景。
-         */
-        new Thread(new TimeServerHandler(socket)).start();
+        timeServerHandlerExecutePool.execute(new TimeServerHandler(socket));
       }
     } finally {
       if (serverSocket != null) {
