@@ -8,6 +8,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 
 /**
  * @Author: chenjj
@@ -18,6 +20,7 @@ public class TimeServer {
 
   public void bind(int port) throws Exception {
     //配置服务端的NIO线程组
+
     // 用于接受客户端的连接
     EventLoopGroup bossGroup = new NioEventLoopGroup();
     // 用于SocketChannel的网络读写
@@ -37,11 +40,30 @@ public class TimeServer {
     }
   }
 
-  private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
+  /*private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
       socketChannel.pipeline().addLast(new TimeServerHandler());
+    }
+  }*/
+
+  /**
+   * 添加解码器
+   */
+  private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
+
+    @Override
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
+      /**
+       *LineBasedFrameDecoder的工作原理是它依次遍历ByteBuf中的可读字节，判断看是否有"\n"或者
+       * "\r\n"，如果有，就以此位置为结束位置，从可读索引到结束位置区间的字节就组成了一行。它是以换行符为结束
+       * 标志的解码器，支持携带结束符或者不携带结束符两张解码方式，同时支持配置单行的最大长度。如果连续读取到最大
+       * 长度后仍然没有发现换行符，就会抛出异常，同时忽略掉之前读到的异常码流。
+       */
+      socketChannel.pipeline().addLast(new LineBasedFrameDecoder(1024));
+      socketChannel.pipeline().addLast(new StringDecoder());
+      socketChannel.pipeline().addLast(new TimeServerHandler1());
     }
   }
 

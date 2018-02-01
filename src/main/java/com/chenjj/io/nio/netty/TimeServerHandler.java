@@ -13,13 +13,37 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
-  @Override
+  private int counter;
+  /*@Override
   public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
     ByteBuf byteBuf = (ByteBuf) msg;
     byte[] request = new byte[byteBuf.readableBytes()];
     byteBuf.readBytes(request);
     String body = new String(request, "UTF-8");
     System.out.println("The time server receive order : " + body);
+    String currentTime =
+        "QUERY TIME ORDER".equalsIgnoreCase(body) ? System.currentTimeMillis() + "" : "BAD ORDER";
+    ByteBuf response = Unpooled.copiedBuffer(currentTime.getBytes());
+    ctx.write(response);
+  }*/
+
+  /**
+   * 故意制造粘包、拆包情况
+   *
+   * @param: ctx
+   * @param: msg
+   * @throws: Exception
+   */
+  @Override
+  public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    ByteBuf byteBuf = (ByteBuf) msg;
+    byte[] request = new byte[byteBuf.readableBytes()];
+    byteBuf.readBytes(request);
+    // System.getProperty("line.separator")是换行符,功能和"\n"是一致的,但是此种写法屏蔽了 Windows和Linux的区别 ，更保险一些.
+    String body = new String(request, "UTF-8")
+        .substring(0, request.length - System.getProperty("line.separator").length());
+    System.out
+        .println("The time server receive order : " + body + "; the counter is : " + ++counter);
     String currentTime =
         "QUERY TIME ORDER".equalsIgnoreCase(body) ? System.currentTimeMillis() + "" : "BAD ORDER";
     ByteBuf response = Unpooled.copiedBuffer(currentTime.getBytes());
