@@ -12,8 +12,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class EchoServerHandler1 extends ChannelInboundHandlerAdapter {
 
-  int counter = 0;
-
   @Override
   public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
     String body = (String) msg;
