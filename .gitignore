@@ -1,3 +1,4 @@
+*.iml
 /.project
 /.classpath
 /.settings
@@ -15,7 +16,6 @@
 # idea ignore
 .idea/
 *.ipr
-netty.iml
 *.iws
 out/
 *.jar
