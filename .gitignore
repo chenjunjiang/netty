@@ -12,6 +12,12 @@
 /src/main/webapp/static
 /target
 .tomcatplugin
+# idea ignore
+.idea/
+*.ipr
+netty.iml
+*.iws
+out/
 *.jar
 /.springBeans
 */.classpath
