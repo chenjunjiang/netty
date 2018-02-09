@@ -3,11 +3,10 @@ package com.chenjj.io.nio.netty.http;
 import static io.netty.handler.codec.http.HttpHeaders.Names.CONNECTION;
 import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
 import static io.netty.handler.codec.http.HttpHeaders.Names.LOCATION;
-import static io.netty.handler.codec.http.HttpResponseStatus.FOUND;
-import static io.netty.handler.codec.http.HttpResponseStatus.OK;
+import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpUtil.isKeepAlive;
 import static io.netty.handler.codec.http.HttpUtil.setContentLength;
-import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
+import static io.netty.handler.codec.http.HttpVersion.*;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -19,8 +18,11 @@ import io.netty.channel.ChannelProgressiveFutureListener;
 import io.netty.channel.DefaultFileRegion;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.DefaultHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.HttpChunkedInput;
+import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponse;
@@ -35,6 +37,12 @@ import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 import javax.activation.MimetypesFileTypeMap;
 
@@ -99,7 +107,8 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         randomAccessFile.close();
       }
     }
-    /*HttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK);
+    // 这里不能用DefaultFullHttpResponse，否则下载文件的时候会阻塞
+    HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
     setContentLength(response, fileLength);
     setContentTypeHeader(response, file);
     if (isKeepAlive(request)) {
@@ -118,7 +127,6 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
           System.err.println("Transfer progress: " + progress + " / " + total);
         }
       }
-
       @Override
       public void operationComplete(ChannelProgressiveFuture future) throws Exception {
         System.out.println("Transfer complete.");
@@ -127,16 +135,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
     ChannelFuture lastContentFuture = ctx.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
     if (!isKeepAlive(request)) {
       lastContentFuture.addListener(ChannelFutureListener.CLOSE);
-    }*/
-    ctx.write("OK: " + fileLength + '\n');
-    if (ctx.pipeline().get(SslHandler.class) == null) {
-      // SSL not enabled - can use zero-copy file transfer.
-      ctx.write(new DefaultFileRegion(randomAccessFile.getChannel(), 0, fileLength));
-    } else {
-      // SSL enabled - cannot use zero-copy file transfer.
-      ctx.write(new ChunkedFile(randomAccessFile));
     }
-    ctx.writeAndFlush("\n");
   }
 
   @Override
