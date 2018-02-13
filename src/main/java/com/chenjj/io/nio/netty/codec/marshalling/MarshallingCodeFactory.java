@@ -6,9 +6,12 @@ import io.netty.handler.codec.marshalling.MarshallerProvider;
 import io.netty.handler.codec.marshalling.MarshallingDecoder;
 import io.netty.handler.codec.marshalling.MarshallingEncoder;
 import io.netty.handler.codec.marshalling.UnmarshallerProvider;
+import java.io.IOException;
+import org.jboss.marshalling.Marshaller;
 import org.jboss.marshalling.MarshallerFactory;
 import org.jboss.marshalling.Marshalling;
 import org.jboss.marshalling.MarshallingConfiguration;
+import org.jboss.marshalling.Unmarshaller;
 
 /**
  * @Author: chenjj
@@ -37,5 +40,23 @@ public class MarshallingCodeFactory {
     MarshallingEncoder encoder = new MarshallingEncoder(provider);
 
     return encoder;
+  }
+
+  public static Marshaller buildMarshalling() throws IOException {
+    final MarshallerFactory marshallerFactory = Marshalling.getProvidedMarshallerFactory("serial");
+    final MarshallingConfiguration configuration = new MarshallingConfiguration();
+    configuration.setVersion(5);
+    Marshaller marshaller = marshallerFactory.createMarshaller(configuration);
+
+    return marshaller;
+  }
+
+  public static Unmarshaller buildUnMarshalling() throws IOException {
+    final MarshallerFactory marshallerFactory = Marshalling.getProvidedMarshallerFactory("serial");
+    final MarshallingConfiguration configuration = new MarshallingConfiguration();
+    configuration.setVersion(5);
+    Unmarshaller unmarshaller = marshallerFactory.createUnmarshaller(configuration);
+
+    return unmarshaller;
   }
 }
