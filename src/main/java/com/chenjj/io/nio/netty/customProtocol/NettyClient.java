@@ -46,12 +46,12 @@ public class NettyClient {
       // 发送异步连接操作，这和之前的写法不同，主要用于服务端重复登录保护，另外，从产品管理角度看，一般情况下不允许系统随便使用随机端口
       ChannelFuture future = bootstrap.connect(new InetSocketAddress(host, port),
           new InetSocketAddress(NettyConstant.LOCALIP, NettyConstant.LOCAL_PORT)).sync();
-      // 等待客户端链路关闭
+      // 会一直等待，直到客户端链路关闭
       future.channel().closeFuture().sync();
     } finally {
       System.out.println("当客户端感知断连事件之后，释放资源，重新发起连接......");
       // 当客户端感知断连事件之后，释放资源，重新发起连接
-      // 客户端挂在closeFuture上监听链路关闭信号，一旦关闭，则创建重连定时器，5s之后重新发起连接，知道重连成功
+      // 客户端挂在closeFuture上监听链路关闭信号，一旦关闭，则创建重连定时器，5s之后重新发起连接，直到重连成功
       executorService.execute(new Runnable() {
         @Override
         public void run() {

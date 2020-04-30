@@ -31,11 +31,11 @@ public class TimeClient {
         }
       });*/
 
-      // 添加解码器
       bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class)
           .option(ChannelOption.TCP_NODELAY, true).handler(new ChannelInitializer<SocketChannel>() {
         @Override
         protected void initChannel(SocketChannel socketChannel) throws Exception {
+          // 添加解码器
           socketChannel.pipeline().addLast(new LineBasedFrameDecoder(1024));
           socketChannel.pipeline().addLast(new StringDecoder());
           socketChannel.pipeline().addLast(new TimeClientHandler1());

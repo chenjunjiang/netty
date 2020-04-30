@@ -19,6 +19,9 @@ public class TimeClientHandler1 extends ChannelInboundHandlerAdapter {
     request = ("QUERY TIME ORDER" + System.getProperty("line.separator")).getBytes();
   }
 
+  /**
+   * 连接成功之后触发channelActive
+   */
   @Override
   public void channelActive(ChannelHandlerContext ctx) throws Exception {
     // 发送消息给服务端

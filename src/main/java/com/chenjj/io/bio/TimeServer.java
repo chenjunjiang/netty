@@ -27,6 +27,7 @@ public class TimeServer {
       System.out.println("The time server is start in port: " + port);
       Socket socket = null;
       while (true) {
+        // 如果没有客户端接入，则主线程阻塞在accept操作上
         socket = serverSocket.accept();
         /**
          * BIO的主要问题在于每当一个新的客户端请求接入时，服务端必须创建一个新的线程处理新接入的客户端链路，

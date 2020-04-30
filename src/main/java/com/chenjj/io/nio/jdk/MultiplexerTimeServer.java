@@ -98,7 +98,7 @@ public class MultiplexerTimeServer implements Runnable {
         ServerSocketChannel serverSocketChannel = (ServerSocketChannel) selectionKey.channel();
         SocketChannel socketChannel = serverSocketChannel.accept();
         socketChannel.configureBlocking(false);
-        // Add the new connection to the selector，监听读操作，读取客户端发送的网络信息
+        // Add the new connection to the selector，监听SocketChannel上的读操作，读取客户端发送的网络信息
         socketChannel.register(selector, SelectionKey.OP_READ);
       }
       if (selectionKey.isReadable()) {
