@@ -10,8 +10,6 @@ public class TimeServer {
   /**
    * @class_name: main
    * @param: [args]
-   * @describe: TODO
-   * @creat_user: wanwt@senthinkcom
    * @creat_date: 2018-01-25
    * @creat_time: 下午 03:01
    **/

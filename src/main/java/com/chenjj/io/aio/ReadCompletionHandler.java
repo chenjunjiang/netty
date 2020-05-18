@@ -44,6 +44,7 @@ public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuf
       ByteBuffer byteBuffer = ByteBuffer.allocate(bytes.length);
       byteBuffer.put(bytes);
       byteBuffer.flip();
+      // 异步发送
       asynchronousSocketChannel.write(byteBuffer, byteBuffer,
           new CompletionHandler<Integer, ByteBuffer>() {
             @Override

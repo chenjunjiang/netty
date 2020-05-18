@@ -18,6 +18,7 @@ public class AcceptCompletionHandler implements
     // 连接，最终形成一个循环。每当接收一个客户端连接成功之后，再异步接收新的客户端连接。
     attachment.asynchronousServerSocketChannel.accept(attachment, this);
     ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+    // 异步读取客户端的请求消息
     result.read(byteBuffer, byteBuffer, new ReadCompletionHandler(result));
   }
 
