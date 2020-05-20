@@ -3,8 +3,6 @@ package com.chenjj.io.nio.netty;
 import com.chenjj.io.nio.netty.codec.msgpack.MsgpackDecoder;
 import com.chenjj.io.nio.netty.codec.msgpack.MsgpackEncoder;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -20,7 +18,7 @@ import io.netty.handler.codec.LengthFieldPrepender;
  * @Date: 2018-01-31
  * @Description:
  */
-public class EchoClient1 {
+public class EchoClient {
 
   public void connect(int port, String host) throws Exception {
     // 配置客户端NIO线程池
@@ -38,7 +36,7 @@ public class EchoClient1 {
               socketChannel.pipeline().addLast("msgpack decoder", new MsgpackDecoder());
               socketChannel.pipeline().addLast("frameEncoder", new LengthFieldPrepender(2));
               socketChannel.pipeline().addLast("msgpack encoder", new MsgpackEncoder());
-              socketChannel.pipeline().addLast(new EchoClientHandler1(1));
+              socketChannel.pipeline().addLast(new EchoClientHandler(1));
             }
           });
       ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
@@ -57,6 +55,6 @@ public class EchoClient1 {
         // 异常之后采用默认值
       }
     }
-    new EchoClient1().connect(port, "127.0.0.1");
+    new EchoClient().connect(port, "127.0.0.1");
   }
 }

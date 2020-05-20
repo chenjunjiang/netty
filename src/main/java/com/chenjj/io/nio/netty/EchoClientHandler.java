@@ -12,11 +12,11 @@ import io.netty.util.concurrent.EventExecutorGroup;
  * @Date: 2018-02-01
  * @Description:
  */
-public class EchoClientHandler1 extends ChannelInboundHandlerAdapter {
+public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
   private final int sendNumber;
 
-  public EchoClientHandler1(int sendNumber) {
+  public EchoClientHandler(int sendNumber) {
     this.sendNumber = sendNumber;
   }
 
