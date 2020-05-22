@@ -1,14 +1,11 @@
 package com.chenjj.io.nio.netty;
 
-import com.chenjj.io.nio.netty.codec.msgpack.Student;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.concurrent.EventExecutorGroup;
-import java.util.AbstractList;
+import org.msgpack.value.IntegerValue;
+import org.msgpack.value.RawValue;
+
 import java.util.List;
-import org.msgpack.type.IntegerValue;
-import org.msgpack.type.RawValue;
 
 /**
  * @Author: chenjj
@@ -19,12 +16,12 @@ public class EchoServerHandler2 extends ChannelInboundHandlerAdapter {
 
   @Override
   public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-    List<Object> values = (List<Object>) msg;
+    /*List<Object> values = (List<Object>) msg;
     IntegerValue integerValue = (IntegerValue) values.get(0);
     RawValue rawValue = (RawValue) values.get(1);
     System.out.println("id: " + integerValue.getInt() + ", name: " + rawValue.getString());
     System.out.println("Server receive the msgpack message : " + msg);
-    ctx.write(msg);
+    ctx.write(msg);*/
   }
 
   @Override

@@ -6,4 +6,7 @@ TCP以流的方式进行数据传输，上层的应用协议为了对消息进�
 4、通过在消息头中定义长度字段来标识消息的总长度。
 
 Netty对上面4种应用做了统一的抽象，提供了4种解码器来解决对应的问题。
-1、DelimiterBasedFrameDecoder可以自动完成以分隔符作为码流结束标识的消息的解码。
+1、通过FixedLengthFrameDecoder 定长解码器来解决定长消息的黏包问题；
+2、通过LineBasedFrameDecoder和StringDecoder来解决以回车换行符作为消息结束符的TCP黏包的问题；
+3、通过DelimiterBasedFrameDecoder 特殊分隔符解码器来解决以特殊符号作为消息结束符的TCP黏包问题；
+4、通过LengthFieldPrepender和LengthFieldBasedFrameDecoder 自定义长度解码器解决TCP黏包问题。

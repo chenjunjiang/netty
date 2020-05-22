@@ -20,20 +20,24 @@ public final class SubscribeRespProto {
 
     /**
      * <code>int32 subReqID = 1;</code>
+     * @return The subReqID.
      */
     int getSubReqID();
 
     /**
      * <code>int32 respCode = 2;</code>
+     * @return The respCode.
      */
     int getRespCode();
 
     /**
      * <code>string desc = 3;</code>
+     * @return The desc.
      */
     java.lang.String getDesc();
     /**
      * <code>string desc = 3;</code>
+     * @return The bytes for desc.
      */
     com.google.protobuf.ByteString
         getDescBytes();
@@ -41,7 +45,7 @@ public final class SubscribeRespProto {
   /**
    * Protobuf type {@code SubscribeResp}
    */
-  public  static final class SubscribeResp extends
+  public static final class SubscribeResp extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:SubscribeResp)
       SubscribeRespOrBuilder {
@@ -51,9 +55,14 @@ public final class SubscribeRespProto {
       super(builder);
     }
     private SubscribeResp() {
-      subReqID_ = 0;
-      respCode_ = 0;
       desc_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SubscribeResp();
     }
 
     @java.lang.Override
@@ -69,7 +78,6 @@ public final class SubscribeRespProto {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
-      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -80,13 +88,6 @@ public final class SubscribeRespProto {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               subReqID_ = input.readInt32();
@@ -101,6 +102,13 @@ public final class SubscribeRespProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               desc_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -120,6 +128,7 @@ public final class SubscribeRespProto {
       return com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.internal_static_SubscribeResp_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.internal_static_SubscribeResp_fieldAccessorTable
@@ -131,7 +140,9 @@ public final class SubscribeRespProto {
     private int subReqID_;
     /**
      * <code>int32 subReqID = 1;</code>
+     * @return The subReqID.
      */
+    @java.lang.Override
     public int getSubReqID() {
       return subReqID_;
     }
@@ -140,7 +151,9 @@ public final class SubscribeRespProto {
     private int respCode_;
     /**
      * <code>int32 respCode = 2;</code>
+     * @return The respCode.
      */
+    @java.lang.Override
     public int getRespCode() {
       return respCode_;
     }
@@ -149,7 +162,9 @@ public final class SubscribeRespProto {
     private volatile java.lang.Object desc_;
     /**
      * <code>string desc = 3;</code>
+     * @return The desc.
      */
+    @java.lang.Override
     public java.lang.String getDesc() {
       java.lang.Object ref = desc_;
       if (ref instanceof java.lang.String) {
@@ -164,7 +179,9 @@ public final class SubscribeRespProto {
     }
     /**
      * <code>string desc = 3;</code>
+     * @return The bytes for desc.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getDescBytes() {
       java.lang.Object ref = desc_;
@@ -180,6 +197,7 @@ public final class SubscribeRespProto {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -189,6 +207,7 @@ public final class SubscribeRespProto {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (subReqID_ != 0) {
@@ -203,6 +222,7 @@ public final class SubscribeRespProto {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -234,15 +254,14 @@ public final class SubscribeRespProto {
       }
       com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp other = (com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp) obj;
 
-      boolean result = true;
-      result = result && (getSubReqID()
-          == other.getSubReqID());
-      result = result && (getRespCode()
-          == other.getRespCode());
-      result = result && getDesc()
-          .equals(other.getDesc());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getSubReqID()
+          != other.getSubReqID()) return false;
+      if (getRespCode()
+          != other.getRespCode()) return false;
+      if (!getDesc()
+          .equals(other.getDesc())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -333,6 +352,7 @@ public final class SubscribeRespProto {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -340,6 +360,7 @@ public final class SubscribeRespProto {
     public static Builder newBuilder(com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -363,6 +384,7 @@ public final class SubscribeRespProto {
         return com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.internal_static_SubscribeResp_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.internal_static_SubscribeResp_fieldAccessorTable
@@ -385,6 +407,7 @@ public final class SubscribeRespProto {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         subReqID_ = 0;
@@ -396,15 +419,18 @@ public final class SubscribeRespProto {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.internal_static_SubscribeResp_descriptor;
       }
 
+      @java.lang.Override
       public com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp getDefaultInstanceForType() {
         return com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp build() {
         com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp result = buildPartial();
         if (!result.isInitialized()) {
@@ -413,6 +439,7 @@ public final class SubscribeRespProto {
         return result;
       }
 
+      @java.lang.Override
       public com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp buildPartial() {
         com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp result = new com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp(this);
         result.subReqID_ = subReqID_;
@@ -422,32 +449,39 @@ public final class SubscribeRespProto {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp) {
           return mergeFrom((com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp)other);
@@ -474,10 +508,12 @@ public final class SubscribeRespProto {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -499,12 +535,16 @@ public final class SubscribeRespProto {
       private int subReqID_ ;
       /**
        * <code>int32 subReqID = 1;</code>
+       * @return The subReqID.
        */
+      @java.lang.Override
       public int getSubReqID() {
         return subReqID_;
       }
       /**
        * <code>int32 subReqID = 1;</code>
+       * @param value The subReqID to set.
+       * @return This builder for chaining.
        */
       public Builder setSubReqID(int value) {
         
@@ -514,6 +554,7 @@ public final class SubscribeRespProto {
       }
       /**
        * <code>int32 subReqID = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearSubReqID() {
         
@@ -525,12 +566,16 @@ public final class SubscribeRespProto {
       private int respCode_ ;
       /**
        * <code>int32 respCode = 2;</code>
+       * @return The respCode.
        */
+      @java.lang.Override
       public int getRespCode() {
         return respCode_;
       }
       /**
        * <code>int32 respCode = 2;</code>
+       * @param value The respCode to set.
+       * @return This builder for chaining.
        */
       public Builder setRespCode(int value) {
         
@@ -540,6 +585,7 @@ public final class SubscribeRespProto {
       }
       /**
        * <code>int32 respCode = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearRespCode() {
         
@@ -551,6 +597,7 @@ public final class SubscribeRespProto {
       private java.lang.Object desc_ = "";
       /**
        * <code>string desc = 3;</code>
+       * @return The desc.
        */
       public java.lang.String getDesc() {
         java.lang.Object ref = desc_;
@@ -566,6 +613,7 @@ public final class SubscribeRespProto {
       }
       /**
        * <code>string desc = 3;</code>
+       * @return The bytes for desc.
        */
       public com.google.protobuf.ByteString
           getDescBytes() {
@@ -582,6 +630,8 @@ public final class SubscribeRespProto {
       }
       /**
        * <code>string desc = 3;</code>
+       * @param value The desc to set.
+       * @return This builder for chaining.
        */
       public Builder setDesc(
           java.lang.String value) {
@@ -595,6 +645,7 @@ public final class SubscribeRespProto {
       }
       /**
        * <code>string desc = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearDesc() {
         
@@ -604,6 +655,8 @@ public final class SubscribeRespProto {
       }
       /**
        * <code>string desc = 3;</code>
+       * @param value The bytes for desc to set.
+       * @return This builder for chaining.
        */
       public Builder setDescBytes(
           com.google.protobuf.ByteString value) {
@@ -616,11 +669,13 @@ public final class SubscribeRespProto {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -642,6 +697,7 @@ public final class SubscribeRespProto {
 
     private static final com.google.protobuf.Parser<SubscribeResp>
         PARSER = new com.google.protobuf.AbstractParser<SubscribeResp>() {
+      @java.lang.Override
       public SubscribeResp parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -659,6 +715,7 @@ public final class SubscribeRespProto {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.chenjj.io.nio.netty.codec.protobuf.SubscribeRespProto.SubscribeResp getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -684,18 +741,10 @@ public final class SubscribeRespProto {
       "sc\030\003 \001(\tB<\n&com.chenjj.io.nio.netty.code" +
       "c.protobufB\022SubscribeRespProtob\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_SubscribeResp_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_SubscribeResp_fieldAccessorTable = new

@@ -20,44 +20,55 @@ public final class SubscribeReqProto {
 
     /**
      * <code>int32 subReqID = 1;</code>
+     * @return The subReqID.
      */
     int getSubReqID();
 
     /**
      * <code>string userName = 2;</code>
+     * @return The userName.
      */
     java.lang.String getUserName();
     /**
      * <code>string userName = 2;</code>
+     * @return The bytes for userName.
      */
     com.google.protobuf.ByteString
         getUserNameBytes();
 
     /**
      * <code>string productName = 3;</code>
+     * @return The productName.
      */
     java.lang.String getProductName();
     /**
      * <code>string productName = 3;</code>
+     * @return The bytes for productName.
      */
     com.google.protobuf.ByteString
         getProductNameBytes();
 
     /**
      * <code>repeated string address = 4;</code>
+     * @return A list containing the address.
      */
     java.util.List<java.lang.String>
         getAddressList();
     /**
      * <code>repeated string address = 4;</code>
+     * @return The count of address.
      */
     int getAddressCount();
     /**
      * <code>repeated string address = 4;</code>
+     * @param index The index of the element to return.
+     * @return The address at the given index.
      */
     java.lang.String getAddress(int index);
     /**
      * <code>repeated string address = 4;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the address at the given index.
      */
     com.google.protobuf.ByteString
         getAddressBytes(int index);
@@ -65,7 +76,7 @@ public final class SubscribeReqProto {
   /**
    * Protobuf type {@code SubscribeReq}
    */
-  public  static final class SubscribeReq extends
+  public static final class SubscribeReq extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:SubscribeReq)
       SubscribeReqOrBuilder {
@@ -75,10 +86,16 @@ public final class SubscribeReqProto {
       super(builder);
     }
     private SubscribeReq() {
-      subReqID_ = 0;
       userName_ = "";
       productName_ = "";
       address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SubscribeReq();
     }
 
     @java.lang.Override
@@ -105,13 +122,6 @@ public final class SubscribeReqProto {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               subReqID_ = input.readInt32();
@@ -131,11 +141,18 @@ public final class SubscribeReqProto {
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 address_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000001;
               }
               address_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -146,7 +163,7 @@ public final class SubscribeReqProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           address_ = address_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
@@ -158,6 +175,7 @@ public final class SubscribeReqProto {
       return com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.internal_static_SubscribeReq_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.internal_static_SubscribeReq_fieldAccessorTable
@@ -165,12 +183,13 @@ public final class SubscribeReqProto {
               com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq.class, com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq.Builder.class);
     }
 
-    private int bitField0_;
     public static final int SUBREQID_FIELD_NUMBER = 1;
     private int subReqID_;
     /**
      * <code>int32 subReqID = 1;</code>
+     * @return The subReqID.
      */
+    @java.lang.Override
     public int getSubReqID() {
       return subReqID_;
     }
@@ -179,7 +198,9 @@ public final class SubscribeReqProto {
     private volatile java.lang.Object userName_;
     /**
      * <code>string userName = 2;</code>
+     * @return The userName.
      */
+    @java.lang.Override
     public java.lang.String getUserName() {
       java.lang.Object ref = userName_;
       if (ref instanceof java.lang.String) {
@@ -194,7 +215,9 @@ public final class SubscribeReqProto {
     }
     /**
      * <code>string userName = 2;</code>
+     * @return The bytes for userName.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getUserNameBytes() {
       java.lang.Object ref = userName_;
@@ -213,7 +236,9 @@ public final class SubscribeReqProto {
     private volatile java.lang.Object productName_;
     /**
      * <code>string productName = 3;</code>
+     * @return The productName.
      */
+    @java.lang.Override
     public java.lang.String getProductName() {
       java.lang.Object ref = productName_;
       if (ref instanceof java.lang.String) {
@@ -228,7 +253,9 @@ public final class SubscribeReqProto {
     }
     /**
      * <code>string productName = 3;</code>
+     * @return The bytes for productName.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getProductNameBytes() {
       java.lang.Object ref = productName_;
@@ -247,6 +274,7 @@ public final class SubscribeReqProto {
     private com.google.protobuf.LazyStringList address_;
     /**
      * <code>repeated string address = 4;</code>
+     * @return A list containing the address.
      */
     public com.google.protobuf.ProtocolStringList
         getAddressList() {
@@ -254,18 +282,23 @@ public final class SubscribeReqProto {
     }
     /**
      * <code>repeated string address = 4;</code>
+     * @return The count of address.
      */
     public int getAddressCount() {
       return address_.size();
     }
     /**
      * <code>repeated string address = 4;</code>
+     * @param index The index of the element to return.
+     * @return The address at the given index.
      */
     public java.lang.String getAddress(int index) {
       return address_.get(index);
     }
     /**
      * <code>repeated string address = 4;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the address at the given index.
      */
     public com.google.protobuf.ByteString
         getAddressBytes(int index) {
@@ -273,6 +306,7 @@ public final class SubscribeReqProto {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -282,6 +316,7 @@ public final class SubscribeReqProto {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (subReqID_ != 0) {
@@ -299,6 +334,7 @@ public final class SubscribeReqProto {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -337,17 +373,16 @@ public final class SubscribeReqProto {
       }
       com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq other = (com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq) obj;
 
-      boolean result = true;
-      result = result && (getSubReqID()
-          == other.getSubReqID());
-      result = result && getUserName()
-          .equals(other.getUserName());
-      result = result && getProductName()
-          .equals(other.getProductName());
-      result = result && getAddressList()
-          .equals(other.getAddressList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getSubReqID()
+          != other.getSubReqID()) return false;
+      if (!getUserName()
+          .equals(other.getUserName())) return false;
+      if (!getProductName()
+          .equals(other.getProductName())) return false;
+      if (!getAddressList()
+          .equals(other.getAddressList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -442,6 +477,7 @@ public final class SubscribeReqProto {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -449,6 +485,7 @@ public final class SubscribeReqProto {
     public static Builder newBuilder(com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -472,6 +509,7 @@ public final class SubscribeReqProto {
         return com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.internal_static_SubscribeReq_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.internal_static_SubscribeReq_fieldAccessorTable
@@ -494,6 +532,7 @@ public final class SubscribeReqProto {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         subReqID_ = 0;
@@ -503,19 +542,22 @@ public final class SubscribeReqProto {
         productName_ = "";
 
         address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.internal_static_SubscribeReq_descriptor;
       }
 
+      @java.lang.Override
       public com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq getDefaultInstanceForType() {
         return com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq build() {
         com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq result = buildPartial();
         if (!result.isInitialized()) {
@@ -524,49 +566,55 @@ public final class SubscribeReqProto {
         return result;
       }
 
+      @java.lang.Override
       public com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq buildPartial() {
         com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq result = new com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.subReqID_ = subReqID_;
         result.userName_ = userName_;
         result.productName_ = productName_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           address_ = address_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.address_ = address_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq) {
           return mergeFrom((com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq)other);
@@ -592,7 +640,7 @@ public final class SubscribeReqProto {
         if (!other.address_.isEmpty()) {
           if (address_.isEmpty()) {
             address_ = other.address_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
             ensureAddressIsMutable();
             address_.addAll(other.address_);
@@ -604,10 +652,12 @@ public final class SubscribeReqProto {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -630,12 +680,16 @@ public final class SubscribeReqProto {
       private int subReqID_ ;
       /**
        * <code>int32 subReqID = 1;</code>
+       * @return The subReqID.
        */
+      @java.lang.Override
       public int getSubReqID() {
         return subReqID_;
       }
       /**
        * <code>int32 subReqID = 1;</code>
+       * @param value The subReqID to set.
+       * @return This builder for chaining.
        */
       public Builder setSubReqID(int value) {
         
@@ -645,6 +699,7 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>int32 subReqID = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearSubReqID() {
         
@@ -656,6 +711,7 @@ public final class SubscribeReqProto {
       private java.lang.Object userName_ = "";
       /**
        * <code>string userName = 2;</code>
+       * @return The userName.
        */
       public java.lang.String getUserName() {
         java.lang.Object ref = userName_;
@@ -671,6 +727,7 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>string userName = 2;</code>
+       * @return The bytes for userName.
        */
       public com.google.protobuf.ByteString
           getUserNameBytes() {
@@ -687,6 +744,8 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>string userName = 2;</code>
+       * @param value The userName to set.
+       * @return This builder for chaining.
        */
       public Builder setUserName(
           java.lang.String value) {
@@ -700,6 +759,7 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>string userName = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUserName() {
         
@@ -709,6 +769,8 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>string userName = 2;</code>
+       * @param value The bytes for userName to set.
+       * @return This builder for chaining.
        */
       public Builder setUserNameBytes(
           com.google.protobuf.ByteString value) {
@@ -725,6 +787,7 @@ public final class SubscribeReqProto {
       private java.lang.Object productName_ = "";
       /**
        * <code>string productName = 3;</code>
+       * @return The productName.
        */
       public java.lang.String getProductName() {
         java.lang.Object ref = productName_;
@@ -740,6 +803,7 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>string productName = 3;</code>
+       * @return The bytes for productName.
        */
       public com.google.protobuf.ByteString
           getProductNameBytes() {
@@ -756,6 +820,8 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>string productName = 3;</code>
+       * @param value The productName to set.
+       * @return This builder for chaining.
        */
       public Builder setProductName(
           java.lang.String value) {
@@ -769,6 +835,7 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>string productName = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearProductName() {
         
@@ -778,6 +845,8 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>string productName = 3;</code>
+       * @param value The bytes for productName to set.
+       * @return This builder for chaining.
        */
       public Builder setProductNameBytes(
           com.google.protobuf.ByteString value) {
@@ -793,13 +862,14 @@ public final class SubscribeReqProto {
 
       private com.google.protobuf.LazyStringList address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureAddressIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           address_ = new com.google.protobuf.LazyStringArrayList(address_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000001;
          }
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @return A list containing the address.
        */
       public com.google.protobuf.ProtocolStringList
           getAddressList() {
@@ -807,18 +877,23 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @return The count of address.
        */
       public int getAddressCount() {
         return address_.size();
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @param index The index of the element to return.
+       * @return The address at the given index.
        */
       public java.lang.String getAddress(int index) {
         return address_.get(index);
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the address at the given index.
        */
       public com.google.protobuf.ByteString
           getAddressBytes(int index) {
@@ -826,6 +901,9 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @param index The index to set the value at.
+       * @param value The address to set.
+       * @return This builder for chaining.
        */
       public Builder setAddress(
           int index, java.lang.String value) {
@@ -839,6 +917,8 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @param value The address to add.
+       * @return This builder for chaining.
        */
       public Builder addAddress(
           java.lang.String value) {
@@ -852,6 +932,8 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @param values The address to add.
+       * @return This builder for chaining.
        */
       public Builder addAllAddress(
           java.lang.Iterable<java.lang.String> values) {
@@ -863,15 +945,18 @@ public final class SubscribeReqProto {
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearAddress() {
         address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
       /**
        * <code>repeated string address = 4;</code>
+       * @param value The bytes of the address to add.
+       * @return This builder for chaining.
        */
       public Builder addAddressBytes(
           com.google.protobuf.ByteString value) {
@@ -884,11 +969,13 @@ public final class SubscribeReqProto {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -910,6 +997,7 @@ public final class SubscribeReqProto {
 
     private static final com.google.protobuf.Parser<SubscribeReq>
         PARSER = new com.google.protobuf.AbstractParser<SubscribeReq>() {
+      @java.lang.Override
       public SubscribeReq parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -927,6 +1015,7 @@ public final class SubscribeReqProto {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.chenjj.io.nio.netty.codec.protobuf.SubscribeReqProto.SubscribeReq getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -953,18 +1042,10 @@ public final class SubscribeReqProto {
       "enjj.io.nio.netty.codec.protobufB\021Subscr" +
       "ibeReqProtob\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_SubscribeReq_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_SubscribeReq_fieldAccessorTable = new

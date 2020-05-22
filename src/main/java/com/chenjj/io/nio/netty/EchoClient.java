@@ -1,7 +1,7 @@
 package com.chenjj.io.nio.netty;
 
-import com.chenjj.io.nio.netty.codec.msgpack.MsgpackDecoder;
-import com.chenjj.io.nio.netty.codec.msgpack.MsgpackEncoder;
+import com.chenjj.io.nio.netty.codec.messagePack.MsgpackDecoder;
+import com.chenjj.io.nio.netty.codec.messagePack.MsgpackEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;

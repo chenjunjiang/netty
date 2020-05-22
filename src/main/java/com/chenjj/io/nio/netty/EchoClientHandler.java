@@ -1,11 +1,8 @@
 package com.chenjj.io.nio.netty;
 
-import com.chenjj.io.nio.netty.codec.jdk.UserInfo;
-import com.chenjj.io.nio.netty.codec.msgpack.Student;
-import io.netty.channel.ChannelHandler;
+import com.chenjj.io.nio.netty.codec.messagePack.Student;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.concurrent.EventExecutorGroup;
 
 /**
  * @Author: chenjj
@@ -51,7 +48,7 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
     Student student = null;
     for (int i = 0; i < sendNumber; i++) {
       student = new Student();
-      student.setId(i);
+      student.setAge(i);
       student.setName("ABCDEFG --->" + i);
       students[i] = student;
     }
