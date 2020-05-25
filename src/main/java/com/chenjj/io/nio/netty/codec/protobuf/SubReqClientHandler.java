@@ -18,6 +18,7 @@ public class SubReqClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         for (int i = 1; i < 11; i++) {
+            // 每一次write都会使用ProtobufVarint32LengthFieldPrepender和ProtobufEncoder对消息进行编码
             ctx.write(subReq(i));
         }
         ctx.flush();

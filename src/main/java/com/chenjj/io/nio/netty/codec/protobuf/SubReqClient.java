@@ -14,6 +14,11 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
 /**
+ * Netty源码分析-ProtobufVarint32LengthFieldPrepender
+ * https://blog.csdn.net/nimasike/article/details/101378388
+ * Netty源码分析-ProtobufVarint32FrameDecoder
+ * https://blog.csdn.net/nimasike/article/details/101392803?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-1
+ *
  * @Author: chenjj
  * @Date: 2018-02-06
  * @Description:

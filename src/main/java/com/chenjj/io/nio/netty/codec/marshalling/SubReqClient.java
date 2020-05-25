@@ -16,40 +16,41 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  */
 public class SubReqClient {
 
-  public void connect(int port, String host) throws Exception {
-    // 配置客户端NIO线程组
-    EventLoopGroup group = new NioEventLoopGroup();
-    try {
-      Bootstrap bootstrap = new Bootstrap();
-      bootstrap.group(group).channel(NioSocketChannel.class)
-          .option(ChannelOption.TCP_NODELAY, true)
-          .handler(new ChannelInitializer<SocketChannel>() {
-            @Override
-            protected void initChannel(SocketChannel socketChannel) throws Exception {
-              // Netty的Marshalling编解码器支持半包和粘包的处理，不需要再添加其它解码器
-              socketChannel.pipeline().addLast(MarshallingCodeFactory.buildMarshallingDecoder());
-              socketChannel.pipeline().addLast(MarshallingCodeFactory.buildMarshallingEncoder());
-              socketChannel.pipeline().addLast(new SubReqClientHandler());
+    public static void main(String[] args) throws Exception {
+        int port = 8080;
+        if (args != null && args.length > 0) {
+            try {
+                port = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                // 异常之后采用默认值
             }
-          });
-      // 发起异步连接操作
-      ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
-      // 等待客户端链路个关闭
-      channelFuture.channel().closeFuture().sync();
-    } finally {
-      group.shutdownGracefully();
+        }
+        new SubReqClient().connect(port, "127.0.0.1");
     }
-  }
 
-  public static void main(String[] args) throws Exception {
-    int port = 8080;
-    if (args != null && args.length > 0) {
-      try {
-        port = Integer.parseInt(args[0]);
-      } catch (NumberFormatException e) {
-        // 异常之后采用默认值
-      }
+    public void connect(int port, String host) throws Exception {
+        // 配置客户端NIO线程组
+        EventLoopGroup group = new NioEventLoopGroup();
+        try {
+            Bootstrap bootstrap = new Bootstrap();
+            bootstrap.group(group).channel(NioSocketChannel.class)
+                    .option(ChannelOption.TCP_NODELAY, true)
+                    .handler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel socketChannel) throws Exception {
+                            // Marshalling编解码器已经实现了对半包和粘包的处理
+                            socketChannel.pipeline().addLast(MarshallingCodeFactory.buildMarshallingDecoder());
+                            socketChannel.pipeline().addLast(MarshallingCodeFactory.buildMarshallingEncoder());
+                            socketChannel.pipeline().addLast(new SubReqClientHandler());
+                        }
+                    });
+            // 发起异步连接操作
+            ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
+            // 等待客户端链路个关闭
+            channelFuture.channel().closeFuture().sync();
+        } finally {
+            group.shutdownGracefully();
+        }
     }
-    new SubReqClient().connect(port, "127.0.0.1");
-  }
+
 }

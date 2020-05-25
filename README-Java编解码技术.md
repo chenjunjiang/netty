@@ -32,5 +32,9 @@ Protobuf作为编解码框架的优点：
 5、支持不同协议版本的前向兼容
 6、支持定义可选和必选字段
 
+C、JBoss Marshalling
+JBoss Marshalling是一个Java对象序列化包，对JDK默认的序列化框架进行优化，但又保持跟
+java.io.Serializable接口的兼容，同时增加一些可调的参数和附加的特性。
+
 
 

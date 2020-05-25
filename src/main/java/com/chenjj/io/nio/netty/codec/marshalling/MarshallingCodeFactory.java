@@ -28,7 +28,6 @@ public class MarshallingCodeFactory {
         configuration);
     // 1024指的是单个消息序列化后的最大长度
     MarshallingDecoder decoder = new MarshallingDecoder(provider, 1024);
-
     return decoder;
   }
 
@@ -38,7 +37,6 @@ public class MarshallingCodeFactory {
     configuration.setVersion(5);
     MarshallerProvider provider = new DefaultMarshallerProvider(marshallerFactory, configuration);
     MarshallingEncoder encoder = new MarshallingEncoder(provider);
-
     return encoder;
   }
 
@@ -47,7 +45,6 @@ public class MarshallingCodeFactory {
     final MarshallingConfiguration configuration = new MarshallingConfiguration();
     configuration.setVersion(5);
     Marshaller marshaller = marshallerFactory.createMarshaller(configuration);
-
     return marshaller;
   }
 
@@ -56,7 +53,6 @@ public class MarshallingCodeFactory {
     final MarshallingConfiguration configuration = new MarshallingConfiguration();
     configuration.setVersion(5);
     Unmarshaller unmarshaller = marshallerFactory.createUnmarshaller(configuration);
-
     return unmarshaller;
   }
 }
