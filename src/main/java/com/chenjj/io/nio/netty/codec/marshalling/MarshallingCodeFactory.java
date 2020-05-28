@@ -16,7 +16,12 @@ import org.jboss.marshalling.Unmarshaller;
 /**
  * @Author: chenjj
  * @Date: 2018-02-07
- * @Description:
+ * @Description: configuration.setVersion(5); 这里必须设置为5，不是5就抛异常，原因可以看源码：
+ * SerialMarshaller(final AbstractMarshallerFactory marshallerFactory, final SerializableClassRegistry registry, final MarshallingConfiguration configuration) throws IOException {
+ *         super(marshallerFactory, configuration);
+ *         if (configuredVersion != 5) {
+ *             throw new IOException("Only protocol version 5 is supported for writing");
+ *         }
  */
 public class MarshallingCodeFactory {
 
