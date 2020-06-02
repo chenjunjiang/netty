@@ -15,51 +15,59 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 /**
  * @Author: chenjj
  * @Date: 2018-02-09
- * @Description: HTTP协议的弊端： (1) HTTP协议为半双工协议。半双工协议指数据可以在客户端和服务端两个方向上传输，但是不能同时传输。
- * 它意味着在同一时刻，只要一个方向上的数据传送。 (2) HTTP消息冗长而繁琐。HTTP消息包含消息头，消息体，换行符等，通常情况下采用文本方式传输，相比 其它二进制通信协议，冗长而繁琐。
- * (3) 针对服务器推送的黑客攻击，例如长时间轮询。 WebSocket的特点： 1、单一的TCP连接，采用全双工模式通信； 2、对代理、防火墙和路由器透明；
- * 3、无头部消息、Cookie和身份验证； 4、无安全开销； 5、通过"ping/pong"帧保持链路激活； 6、服务器可以主动传递消息给客户端，不需要客户端轮询。
+ * @Description: 如果客户端(WebSocketServer.html ， 这里指浏览器)没有加应用层面的心跳机制，
+ * 那么默认使用的是基于TCP keepalive，客户端与服务端第一次建立连接成功并发送消息之后，
+ * 如果在tcp_keepalive_time(默认7200s)时间内客户端和服务端没有进行任何数据传输，
+ * TCP层将发送相应的KeepAlive探针以确定连接可用性，探测失败后重试 10（参数 tcp_keepalive_probes）次，
+ * 每次间隔时间 75s（参数tcp_keepalive_intvl），所有探测失败后，就认为当前连接已经不可用。
+ * 服务端会关闭这个连接，客户端收到这个关闭连接的消息后就会执行socket.onclose回调函数。
+ * 所以我们再点击页面上"发送 WebSocket 请求消息"按钮时会提示"WebSocket连接没有建立成功!"。
+ * <p>
+ * 如果客户端(这里指浏览器)使用WebSocketServer-heartbeat.html，
+ * 那么连接的检测是通过应用层面的心跳机制(ping pong)来保证的。
+ * <p>
+ * 服务端主动关闭连接后也会执行客户端的socket.onclose回调函数。
  */
 public class WebSocketServer {
 
-  public void run(int port) throws Exception {
-    EventLoopGroup bossGroup = new NioEventLoopGroup();
-    EventLoopGroup workerGroup = new NioEventLoopGroup();
-    try {
-      ServerBootstrap serverBootstrap = new ServerBootstrap();
-      serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-          .childHandler(new ChannelInitializer<SocketChannel>() {
-            @Override
-            protected void initChannel(SocketChannel ch) throws Exception {
-              ChannelPipeline pipeline = ch.pipeline();
-              // 将请求和应答消息编码或解码为HTTP消息
-              pipeline.addLast("http-codec", new HttpServerCodec());
-              // HttpObjectAggregator的目的是将HTTP消息的多个部分组合成一条完整的HTTP消息
-              pipeline.addLast("aggregator", new HttpObjectAggregator(65536));
-              // ChunkedWriteHandler用于向客户端发送HTML5文件，它主要用于支持浏览器和服务端进行WebSocket通信
-              pipeline.addLast("http-chunked", new ChunkedWriteHandler());
-              pipeline.addLast("handler", new WebSocketServerHandler());
-            }
-          });
-      Channel channel = serverBootstrap.bind(port).sync().channel();
-      System.out.println("Web socket server started at port " + port + ".");
-      System.out.println("Open your browser and navigate to http://localhost:" + port + "/");
-      channel.closeFuture().sync();
-    } finally {
-      bossGroup.shutdownGracefully();
-      workerGroup.shutdownGracefully();
+    public void run(int port) throws Exception {
+        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        try {
+            ServerBootstrap serverBootstrap = new ServerBootstrap();
+            serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel ch) throws Exception {
+                            ChannelPipeline pipeline = ch.pipeline();
+                            // 将请求和应答消息编码或解码为HTTP消息
+                            pipeline.addLast("http-codec", new HttpServerCodec());
+                            // HttpObjectAggregator的目的是将HTTP消息的多个部分组合成一条完整的HTTP消息
+                            pipeline.addLast("aggregator", new HttpObjectAggregator(65536));
+                            // ChunkedWriteHandler用于向客户端发送HTML5文件，它主要用于支持浏览器和服务端进行WebSocket通信
+                            pipeline.addLast("http-chunked", new ChunkedWriteHandler());
+                            pipeline.addLast("handler", new WebSocketServerHandler());
+                        }
+                    });
+            Channel channel = serverBootstrap.bind(port).sync().channel();
+            System.out.println("Web socket server started at port " + port + ".");
+            System.out.println("Open your browser and navigate to http://localhost:" + port + "/");
+            channel.closeFuture().sync();
+        } finally {
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
+        }
     }
-  }
 
-  public static void main(String[] args) throws Exception {
-    int port = 8080;
-    if (args != null && args.length > 0) {
-      try {
-        port = Integer.parseInt(args[0]);
-      } catch (NumberFormatException e) {
-        // 异常之后采用默认值
-      }
+    public static void main(String[] args) throws Exception {
+        int port = 8080;
+        if (args != null && args.length > 0) {
+            try {
+                port = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                // 异常之后采用默认值
+            }
+        }
+        new WebSocketServer().run(port);
     }
-    new WebSocketServer().run(port);
-  }
 }

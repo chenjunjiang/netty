@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Netty WebSocket 时间服务器</title>
+  Netty WebSocket 时间服务器
+</head>
+<br>
+<body>
+<br>
+<script type="text/javascript">
+  var socket;
+  if (!window.WebSocket) {
+    window.WebSocket = window.MozWebSocket;
+  }
+  if (window.WebSocket) {
+    socket = new WebSocket("ws://localhost:8080/websocket");
+	socket.onopen = function () {
+      heartCheck.reset().start(); //心跳检测重置
+	  ta.value = "";
+      ta.value = "WebSocket连接成功";
+    };
+    socket.onmessage = function (event) {
+	  // 只要收到服务端的数据就说明当前连接是正常的
+	  heartCheck.reset().start(); //心跳检测重置
+	  if(event.data!='pong'){
+	     var ta = document.getElementById("responseText");
+         ta.value = "";
+         ta.value = event.data;
+	  }
+    };
+    socket.onclose = function (event) {
+      var ta = document.getElementById("responseText");
+      ta.value = "";
+      ta.value = "WebSocket关闭";
+    };
+  }
+  else {
+    alert("抱歉，您的浏览器不支持WebSocket协议!");
+  }
+
+  function send(message) {
+    if (!window.WebSocket) {
+      return;
+    }
+    if (socket.readyState == WebSocket.OPEN) {
+      socket.send(message);
+    } else {
+      alert("WebSocket连接没有建立成功!");
+    }
+  }
+  
+//心跳检测
+var heartCheck = {
+    timeout: 10000,        //1分钟发一次心跳
+    timeoutObj: null,
+    serverTimeoutObj: null,
+    reset: function(){
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+        return this;
+    },
+    start: function(){
+        var self = this;
+        this.timeoutObj = setTimeout(function(){
+            //这里发送一个心跳，后端收到后，返回一个心跳消息，onmessage拿到返回的心跳就说明连接正常
+            socket.send("ping");
+            self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了连接
+                socket.close();
+            }, self.timeout)
+        }, this.timeout)
+    }
+}
+</script>
+<form onsubmit="return false;">
+  <input type="text" name="message" value="Netty最佳实践2"/>
+  <br><br>
+  <input type="button" value="发送 WebSocket 请求消息" onclick="send(this.form.message.value)"/>
+  <hr color="blue"/>
+  <h3>服务端返回的应答消息</h3>
+  <textarea id="responseText" style="width: 500px;height: 300px;"></textarea>
+</form>
+</body>
+</html>
