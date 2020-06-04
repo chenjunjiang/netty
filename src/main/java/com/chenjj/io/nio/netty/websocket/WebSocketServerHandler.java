@@ -12,8 +12,6 @@ import io.netty.handler.codec.http.HttpUtil;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
 
-import java.util.concurrent.TimeUnit;
-
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 import static io.netty.handler.codec.rtsp.RtspResponseStatuses.BAD_REQUEST;
 
@@ -26,6 +24,13 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 
     private WebSocketServerHandshaker handshaker;
 
+    /**
+     * 这里的msg类型是Object，说明能处理所有的类型，既能处理FullHttpRequest，也能处理WebSocketFrame
+     *
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         // 第一次建立WebSocket连接的时候使用的是HTTP接入，成功之后后面的通讯就走WebSocket接入
@@ -112,6 +117,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
                     e.printStackTrace();
                 }
                 System.out.println("异步发送消息给客户端" + i);
+                // 这里由于是打开一个线程异步处理,这里必须使用writeAndFlush
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(
                         request + " , 欢迎使用Netty WebSocket服务" + i + "，现在时刻：" + System.currentTimeMillis()));
             }
