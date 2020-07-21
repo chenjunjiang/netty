@@ -9,7 +9,7 @@ import java.util.Map;
  * @Description:
  */
 public final class Header {
-
+  // 消息校验码，具体意思参考README-私有协议开发.md
   private int crcCode = 0xabef0101;
   // 消息长度
   private int length;

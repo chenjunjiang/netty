@@ -4,6 +4,7 @@ pipeline.addLast(new outboundsHandler1()); //out1，编码器1
 pipeline.addLast(new outboundsHandler2()); //out2，编码器2
 pipeline.addLast(new InboundsHandler1()); //in1，解码器1
 pipeline.addLast(new InboundsHandler2()); //in2，解码器2
+pipeline.addLast(new InboundsHandler3()); //in3，解码器3
 pipeline.addLast("handler", new HelloServerHandler()); // handler
 读取数据的时候，需要解码数据，此时执行顺序和注册顺序一致 in1 --> in2 -->in3，
 解码完成后进行业务逻辑处理，然后通过ctx.writeAndFlush()发送数据，

@@ -30,9 +30,9 @@ public class TimeServer {
 
     public void bind(int port) throws Exception {
         //配置服务端的NIO线程组，采用多reactor模式
-        // 用于接受客户端的连接
+        // bossGroup用于接受客户端的连接
         EventLoopGroup bossGroup = new NioEventLoopGroup();
-        // 用于SocketChannel的网络读写
+        // workerGroup用于SocketChannel的网络读写
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
