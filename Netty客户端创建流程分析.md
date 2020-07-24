@@ -1,0 +1,12 @@
+# Netty客户端创建流程分析
+1、用户线程创建Bootstrap实例，通过API设置创建客户端相关的参数，异步发起客户端连接。
+2、创建处理客户端连接、IO读写的Reactor线程组NioEventLoopGroup。可以通过构造函数指定IO线程的个数，默认为CPU内核数的2倍；
+3、通过Bootstrap的ChannelFactory和用户指定的Channel类型创建用于客户端连接的NioSocketChannel，它的功能类似于JDK NIO
+类库提供的SocketChannel；
+4、创建默认的Channel Handler Pipeline，用于调度和执行网络事件；
+5、异步发起TCP连接，判断连接是否成功。如果成功，则需要将NioSocketChannel注册到多路复用器上，监听读操作位，用于数据报读取
+和消息发送；如果没有立即连接成功，则注册连接监听位到多路复用器，等待连接结果；
+6、注册对应的网络监听位到多路复用器；
+7、由多路复用器在IO线程上轮询各个Channel，处理连接结果；
+8、如果连接成功，设置Future结果，发送连接成功事件，触发ChannelPipeline执行；
+9、由ChannelPipeline调度执行系统和用户的ChannelHandler，执行业务逻辑。
