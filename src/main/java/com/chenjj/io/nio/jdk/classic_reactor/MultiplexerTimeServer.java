@@ -16,6 +16,11 @@ import java.util.Set;
  * @Description: JDK使用epoll代替了传统的select实现，所以没有最大连接句柄1024/2048的限制。
  * (只受限于操作系统的最大句柄数或者对单个进程的句柄限制)，这就意味着一个selector线程可以同时处理
  * 成千上万个客户端连接，而且性能不会随着客户端的增加而线性下降。非常适合做高性能、高负载的网络服务器。
+ * 在Reactor模式中，包含如下角色：
+ * Reactor 将I/O事件发派给对应的Handler
+ * Acceptor 处理客户端连接请求
+ * Handlers 执行非阻塞读/写
+ * 为了方便阅读，下面的代码将Reactor模式中的所有角色放在了一个类中。
  */
 public class MultiplexerTimeServer implements Runnable {
 
