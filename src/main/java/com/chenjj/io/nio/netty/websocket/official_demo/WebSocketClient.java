@@ -18,6 +18,7 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
 /**
  * https://netty.io/4.1/xref/io/netty/example/http/websocketx/client/WebSocketClient.html
