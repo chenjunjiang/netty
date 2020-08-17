@@ -124,8 +124,7 @@ NioEventLoop->(read/write)->decode Handler->log Handler->encode Handler->...... 
    b、第二种零拷贝的实现CompositeByteBuf，它对外将多个ByteBuf封装成一个ByteBuf，对外提供统一封装后的ByteBuf接口，
 多个ByteBuf组合成一个集合，添加ByteBuf，不需要做内存拷贝。
    c、第三种"零拷贝"就是文件传输，Netty文件传输类DefaultFileRegion通过transferTo方法将文件发送到目标Channel中，
-重点看FileChannel的transferTo方法。
-   很多操作系统直接将文件缓冲区的内容发送到目标Channel中，而不需要通过循环拷贝的方式，这是一种更加高效的传输方式，提升了
+重点看FileChannel的transferTo方法。很多操作系统直接将文件缓冲区的内容发送到目标Channel中，而不需要通过循环拷贝的方式，这是一种更加高效的传输方式，提升了
 传输性能，降低了CPU和内存占用，实现了文件传输的"零拷贝"。
 
    (7) 内存池
