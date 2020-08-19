@@ -24,7 +24,7 @@ public class TimeServer {
     }
     MultiplexerTimeServer multiplexerTimeServer = new MultiplexerTimeServer(port);
     /*
-    java虚拟机(相当于进程)退出的时机是：虚拟机中所有存活的线程都是守护线程。只要还有存活的非守护线程虚拟机就不会退出，
+    jvm进程退出的时机是：虚拟机中所有存活的线程都是守护线程。只要还有存活的非守护线程虚拟机就不会退出，
     而是等待非守护线程执行完毕；反之，如果虚拟机中的线程都是守护线程，那么不管这些线程的死活java虚拟机都会退出。
      */
     /*new Thread(()->{
